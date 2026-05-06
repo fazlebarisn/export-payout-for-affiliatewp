@@ -82,7 +82,7 @@
 
 /* Export Button */
 #epfaw-export-btn {
-    background: #0073aa;
+    background: #1EC8DC;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -95,7 +95,7 @@
 }
 
 #epfaw-export-btn:hover {
-    background: #005177;
+    background: #16a8ba;
 }
 
 #epfaw-export-btn:disabled {
@@ -115,7 +115,7 @@
 /* Button on Payouts Tab */
 #epfaw-open-modal-btn {
     display: inline-block;
-    background: #28a745;
+    background: #1EC8DC;
     color: #fff;
     padding: 8px 15px;
     border-radius: 4px;
@@ -128,5 +128,5 @@
 }
 
 #epfaw-open-modal-btn:hover {
-    background: #218838;
+    background: #16a8ba;
 }

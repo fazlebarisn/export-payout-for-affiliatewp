@@ -1,12 +1,14 @@
 <?php
 /**
  * Plugin Name: Export Payout For AffiliateWp
- * Plugin URI: #
+ * Plugin URI: https://github.com/fazlebarisn/export-payout-for-affiliatewp
  * Description: Adds an export button on the payouts tab for the AffiliateWP plugin to export payouts in Excel, PDF, or CSV.
  * Version: 1.0.0
  * Author: Fazle Bari
- * Author URI: #
- * Text Domain: export-payout-affwp
+ * Author URI: https://github.com/fazlebarisn
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: export-payout-for-affiliatewp
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
