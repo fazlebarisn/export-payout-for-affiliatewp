@@ -1,6 +1,6 @@
 === Export Payout For AffiliateWp ===
 Contributors: fazlebarisn
-Tags: affiliatewp, export, payouts, csv, excel, pdf
+Tags: affiliatewp, export, payouts, excel, pdf
 Requires at least: 5.0
 Tested up to: 6.9
 Stable tag: 1.0.0

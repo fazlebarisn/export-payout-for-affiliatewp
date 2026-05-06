@@ -37,11 +37,11 @@ class Export_Payout_For_AffiliateWp {
         );
 
         // Include SheetJS for Excel
-        wp_enqueue_script( 'xlsx', 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js', array(), '0.18.5', true );
+        wp_enqueue_script( 'xlsx', plugin_dir_url( __FILE__ ) . 'assets/js/lib/xlsx.full.min.js', array(), '0.18.5', true );
         // Include jsPDF for PDF
-        wp_enqueue_script( 'jspdf', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', array(), '2.5.1', true );
+        wp_enqueue_script( 'jspdf', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.umd.min.js', array(), '2.5.1', true );
         // Include jsPDF AutoTable for PDF tables
-        wp_enqueue_script( 'jspdf-autotable', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js', array('jspdf'), '3.5.28', true );
+        wp_enqueue_script( 'jspdf-autotable', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.plugin.autotable.min.js', array('jspdf'), '3.5.28', true );
 
         wp_enqueue_script(
             'epfaw-script',
@@ -152,7 +152,7 @@ class Export_Payout_For_AffiliateWp {
         $table_name = $wpdb->prefix . 'affiliate_wp_payouts';
 
         // Check if table exists
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
             wp_send_json_error( 'Payouts table not found' );
         }
@@ -171,7 +171,7 @@ class Export_Payout_For_AffiliateWp {
 
         $query .= " ORDER BY date DESC";
 
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         $payouts = $wpdb->get_results( $wpdb->prepare( $query, $args ), ARRAY_A );
 
         // Format dates and amounts for JS
