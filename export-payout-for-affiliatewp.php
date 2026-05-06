@@ -125,25 +125,25 @@ class Export_Payout_For_AffiliateWp {
             wp_send_json_error( 'User is not an affiliate' );
         }
 
-        $duration   = isset( $_POST['duration'] ) ? sanitize_text_field( $_POST['duration'] ) : 'this_month';
-        $date_from  = isset( $_POST['date_from'] ) ? sanitize_text_field( $_POST['date_from'] ) : '';
-        $date_to    = isset( $_POST['date_to'] ) ? sanitize_text_field( $_POST['date_to'] ) : '';
+        $duration   = isset( $_POST['duration'] ) ? sanitize_text_field( wp_unslash( $_POST['duration'] ) ) : 'this_month';
+        $date_from  = isset( $_POST['date_from'] ) ? sanitize_text_field( wp_unslash( $_POST['date_from'] ) ) : '';
+        $date_to    = isset( $_POST['date_to'] ) ? sanitize_text_field( wp_unslash( $_POST['date_to'] ) ) : '';
 
         $start_date = '';
         $end_date   = '';
 
         if ( $duration === 'this_month' ) {
-            $start_date = date( 'Y-m-01 00:00:00' );
-            $end_date   = date( 'Y-m-t 23:59:59' );
+            $start_date = gmdate( 'Y-m-01 00:00:00' );
+            $end_date   = gmdate( 'Y-m-t 23:59:59' );
         } elseif ( $duration === 'last_month' ) {
-            $start_date = date( 'Y-m-01 00:00:00', strtotime( 'first day of last month' ) );
-            $end_date   = date( 'Y-m-t 23:59:59', strtotime( 'last day of last month' ) );
+            $start_date = gmdate( 'Y-m-01 00:00:00', strtotime( 'first day of last month' ) );
+            $end_date   = gmdate( 'Y-m-t 23:59:59', strtotime( 'last day of last month' ) );
         } elseif ( $duration === 'custom' ) {
             if ( $date_from ) {
-                $start_date = date( 'Y-m-d 00:00:00', strtotime( $date_from ) );
+                $start_date = gmdate( 'Y-m-d 00:00:00', strtotime( $date_from ) );
             }
             if ( $date_to ) {
-                $end_date = date( 'Y-m-d 23:59:59', strtotime( $date_to ) );
+                $end_date = gmdate( 'Y-m-d 23:59:59', strtotime( $date_to ) );
             }
         }
 
@@ -152,6 +152,7 @@ class Export_Payout_For_AffiliateWp {
         $table_name = $wpdb->prefix . 'affiliate_wp_payouts';
 
         // Check if table exists
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
             wp_send_json_error( 'Payouts table not found' );
         }
@@ -170,6 +171,7 @@ class Export_Payout_For_AffiliateWp {
 
         $query .= " ORDER BY date DESC";
 
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $payouts = $wpdb->get_results( $wpdb->prepare( $query, $args ), ARRAY_A );
 
         // Format dates and amounts for JS
