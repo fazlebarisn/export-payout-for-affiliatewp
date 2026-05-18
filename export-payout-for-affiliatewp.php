@@ -37,11 +37,11 @@ class Export_Payout_For_AffiliateWp {
         );
 
         // Include SheetJS for Excel
-        wp_enqueue_script( 'xlsx', plugin_dir_url( __FILE__ ) . 'assets/js/lib/xlsx.full.min.js', array(), '0.18.5', true );
+        wp_enqueue_script( 'xlsx', plugin_dir_url( __FILE__ ) . 'assets/js/lib/xlsx.full.min.js', array(), '0.20.2', true );
         // Include jsPDF for PDF
-        wp_enqueue_script( 'jspdf', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.umd.min.js', array(), '2.5.1', true );
+        wp_enqueue_script( 'jspdf', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.umd.min.js', array(), '2.5.2', true );
         // Include jsPDF AutoTable for PDF tables
-        wp_enqueue_script( 'jspdf-autotable', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.plugin.autotable.min.js', array('jspdf'), '3.5.28', true );
+        wp_enqueue_script( 'jspdf-autotable', plugin_dir_url( __FILE__ ) . 'assets/js/lib/jspdf.plugin.autotable.min.js', array('jspdf'), '3.8.2', true );
 
         wp_enqueue_script(
             'epfaw-script',
